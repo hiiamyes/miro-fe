@@ -1,7 +1,19 @@
 window.onload = function(){
-  // console.log('gg')
+
   var req = new XMLHttpRequest();
-  req.open('GET', 'http://127.0.0.1:5000/哈哈');
-  // req.send
-  req.send()
+
+  document.getElementById('input').addEventListener('keypress', e => {
+    if (e.keyCode === 13){
+      req.open('GET', 'http://dc6e9a15.ngrok.io/' + e.target.value + ')');
+      // req.setRequestHeader('Content-type', 'application/json; charset=utf-8')
+      req.send()
+      req.onload = function(){
+        let song = JSON.parse(this.responseText);
+        document.getElementById('miro-say').innerHTML = song.lyric_partial;
+      }
+    }
+  })
+
+
+
 }
